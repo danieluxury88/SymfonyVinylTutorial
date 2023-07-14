@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
-
+import axios from 'axios';
 /*
  * This is an example Stimulus controller!
  *
@@ -13,8 +13,19 @@ export default class extends Controller {
     // connect() {
     //     console.log("I just appeared into existence!");
     // }
+
+    static values = {
+        infoUrl: String
+    }
+
     play(event){
         event.preventDefault();
-        console.log("playing");
+        console.log("playing", this.infoUrlValue);
+
+        axios.get(this.infoUrlValue).then((response)=> {
+            console.log(response);
+            const audio = new Audio(response.data.url);
+            audio.play();
+        })
     }
 }
