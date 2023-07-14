@@ -11,7 +11,7 @@ class VinylController extends AbstractController
 {
 
     
-    #[Route('/')]
+    #[Route('/', name: 'app_homepage')]
     public function homepage(): Response
     {
         $tracks = [
@@ -31,7 +31,7 @@ class VinylController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/browse/{slug}', name: 'browse', methods: ['GET'])]
+    #[Route(path: '/browse/{slug}', name: 'app_browse', methods: ['GET'])]
     public function browse(string $slug = null): Response
     {
         $genre = $slug? u(str_replace('-', ' ', $slug))->title(true) : null;
